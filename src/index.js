@@ -10,7 +10,7 @@ import { renderMainComposition } from './compositions/renderMainComposition.js';
 ffmpeg.setFfmpegPath(ffmpegStatic);
 
 // Clean up the temporary directories first
-for (const path of ['out', 'tmp/output']) {
+for (const path of ['out', 'tmp/output','tmp/video-1','tmp/video-2','tmp/video-3']) {
   if (fs.existsSync(path)) {
     await fs.promises.rm(path, { recursive: true });
   }

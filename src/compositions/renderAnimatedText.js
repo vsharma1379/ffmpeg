@@ -9,6 +9,7 @@ export function renderAnimatedText(context, text, font, x, y, time) {
   context.save();
 
   context.font = font;
+  context.fillStyle = 'black';
 
   // Measure how the dimensions of the text
   const textMetrics = context.measureText(text);

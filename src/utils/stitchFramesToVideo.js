@@ -21,6 +21,7 @@ export async function stitchFramesToVideo(
       // Add the soundtrack
       .input(soundtrackFilePath)
       .audioFilters([
+        'volume=1',
         // Fade out the volume 2 seconds before the end
         `afade=out:st=${duration - 2}:d=2`,
       ])
