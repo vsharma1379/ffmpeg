@@ -22,17 +22,26 @@ export function renderAnimatedText(canvas,context, text, font, x, y, time) {
   const startX = 0; // Start from off-screen on the left
 const endX = (canvas.width - textWidth) / 2; // End at center of canvas
 
+const xPosition = (canvas.width - textWidth) / 2; // Horizontally centered
+// Vertically centered
 
 
 
 
   // Interpolate the y position of the text from 0 to the font size
-  const xOffset = interpolateKeyframes([
-    { time: 0, value: startX },
-    { time: 1, value: endX, easing: 'expo-out' },
+  // const xOffset = interpolateKeyframes([
+  //   { time: 0, value: startX },
+  //   { time: 1, value: endX, easing: 'expo-out' },
+  // ], time);
+
+  const opacity = interpolateKeyframes([
+    { time: 0, value: 0 },        // Start fully transparent
+    { time: 1, value: 1 },        // End fully opaque
   ], time);
 
-  console.log(xOffset)
+  context.globalAlpha = opacity;
+
+
   const yPosition = (canvas.height + fontHeight) / 2;
 
   // Clip to the bounding box of the text
@@ -42,7 +51,8 @@ const endX = (canvas.width - textWidth) / 2; // End at center of canvas
 
   // Draw the text
   //context.fillText(text, x, y + offset);
-  context.fillText(text, xOffset, yPosition);
+  //context.fillText(text, xOffset, yPosition);
 
+  context.fillText(text, xPosition, yPosition);
   context.restore();
 }
