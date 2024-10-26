@@ -9,35 +9,35 @@ export function renderAnimatedText(canvas,context, text, font, x, y, time) {
 
   context.save();
 
-  context.font = font;
-  context.fillStyle = 'black';
-  const textMetrics = context.measureText(text);
-  const textWidth = textMetrics.width;
-  const fontHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
-  const xPosition = (canvas.width - textWidth) / 2;
-  const yPosition = (canvas.height + fontHeight) / 2;
+  const blockWidth = 400;
+  const blockHeight = 200;
+  const blockX = canvas.width / 2;
+  const blockY = canvas.height / 2;
+  const angle = -15 * (Math.PI / 180); // 15 degrees in radians
 
-  // Calculate progress for revealing text
-  const revealProgress = interpolateKeyframes([
-    { time: 0, value: 1 },
-    { time: 1, value: 0 },
+  // Calculate opacity using interpolateKeyframes
+  const opacity = interpolateKeyframes([
+    { time: 0, value: 0 },
+    { time: 1, value: 1 }
   ], time);
 
-  // Calculate the number of characters to reveal based on time
-  const totalCharacters = text.length;
-  const charactersToReveal = Math.floor(totalCharacters * (1 - revealProgress));
+  // Set opacity
+  context.globalAlpha = opacity;
 
-  // Render each character with progressively increasing opacity
-  for (let i = 0; i < charactersToReveal; i++) {
-    const char = text[i];
+  // Transform for tilt
+  context.translate(blockX, blockY);
+  context.rotate(angle);
 
-    // Calculate character position and opacity
-    const charX = xPosition + context.measureText(text.substring(0, i)).width;
-    const charOpacity = Math.min(1, 1 - revealProgress * (i / totalCharacters + 0.1));
+  // Draw block
+  context.fillStyle = 'rgba(0, 0, 0, 0.7)';
+  context.fillRect(-blockWidth / 2, -blockHeight / 2, blockWidth, blockHeight);
 
-    context.globalAlpha = charOpacity;
-    context.fillText(char, charX, yPosition);
-  }
+  // Draw text in the center
+  context.font = 'bold 36px Arial';
+  context.fillStyle = 'white';
+  context.textAlign = 'center';
+  context.textBaseline = 'middle';
+  context.fillText(text, 0, 0);
 
   context.restore();
 }
