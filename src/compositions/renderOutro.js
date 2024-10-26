@@ -1,19 +1,22 @@
 import { renderAnimatedText } from './renderAnimatedText.js';
 
-export function renderOutro(context, logo, width, height, time) {
+export function renderOutro(canvas,context, logo, width, height, time) {
 
   if (time < 0) {
+  
     return;
   }
 
-  context.drawImage(logo, 0.1789 * width, 0.3311 * height, 0.19 * width, 0.3378 * height);
+ // context.drawImage(logo, 0.1789 * width, 0.3311 * height, 0.19 * width, 0.3378 * height);
 
   context.font = `${0.1455 * height}px Chivo`;
   context.fillStyle = 'black';
-  context.fillText('Logoipsum', 0.3972 * width, 0.5355 * height);
+  //context.fillText('Logoipsum', 0.3972 * width, 0.5355 * height);
 
   renderAnimatedText(
+    canvas,
     context,
+ 
     'www.mywebsite.com',
     `${0.0762 * height}px Chivo`,
     0.3972 * width,

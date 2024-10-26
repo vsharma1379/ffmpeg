@@ -19,30 +19,30 @@ for (const path of ['out', 'tmp/output','tmp/video-1','tmp/video-2','tmp/video-3
 
 // The video length and frame rate, as well as the number of frames required
 // to create the video
-const duration = 9.15;
-const frameRate = 60;
+const duration = 3;
+const frameRate = 30;
 const frameCount = Math.floor(duration * frameRate);
 
-console.log('Extracting frames from video 1...');
-const getVideo1Frame = await getVideoFrameReader(
-  'assets/pexels-4782135.mp4',
-  'tmp/video-1',
-  frameRate,
-);
+// console.log('Extracting frames from video 1...');
+// const getVideo1Frame = await getVideoFrameReader(
+//   'assets/pexels-4782135.mp4',
+//   'tmp/video-1',
+//   frameRate,
+// );
 
-console.log('Extracting frames from video 2...');
-const getVideo2Frame = await getVideoFrameReader(
-  'assets/pexels-3576378.mp4',
-  'tmp/video-2',
-  frameRate,
-);
+// console.log('Extracting frames from video 2...');
+// const getVideo2Frame = await getVideoFrameReader(
+//   'assets/pexels-3576378.mp4',
+//   'tmp/video-2',
+//   frameRate,
+// );
 
-console.log('Extracting frames from video 3...');
-const getVideo3Frame = await getVideoFrameReader(
-  'assets/pexels-2829177.mp4',
-  'tmp/video-3',
-  frameRate,
-);
+// console.log('Extracting frames from video 3...');
+// const getVideo3Frame = await getVideoFrameReader(
+//   'assets/pexels-2829177.mp4',
+//   'tmp/video-3',
+//   frameRate,
+// );
 
 const logo = await loadImage('assets/logo.svg');
 
@@ -66,15 +66,17 @@ for (let i = 0; i < frameCount; i++) {
   context.fillRect(0, 0, canvas.width, canvas.height);
 
   // Grab a frame from our input videos
-  const image1 = await getVideo1Frame();
-  const image2 = await getVideo2Frame();
-  const image3 = await getVideo3Frame();
+  // const image1 = await getVideo1Frame();
+  // const image2 = await getVideo2Frame();
+  // const image3 = await getVideo3Frame();
 
   renderMainComposition(
+    canvas,
     context,
-    image1,
-    image2,
-    image3,
+
+    '',
+    '',
+    '',
     logo,
     canvas.width,
     canvas.height,
