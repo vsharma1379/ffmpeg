@@ -15,6 +15,7 @@ export function renderAnimatedText(context, text, font, x, y, time) {
   const textMetrics = context.measureText(text);
   const fontHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
 
+
   // Interpolate the y position of the text from 0 to the font size
   const offset = interpolateKeyframes([
     { time: 0, value: -fontHeight },

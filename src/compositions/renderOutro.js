@@ -6,11 +6,11 @@ export function renderOutro(context, logo, width, height, time) {
     return;
   }
 
-  context.drawImage(logo, 0.1789 * width, 0.3311 * height, 0.19 * width, 0.3378 * height);
+  // context.drawImage(logo, 0.1789 * width, 0.3311 * height, 0.19 * width, 0.3378 * height);
 
-  context.font = `${0.1455 * height}px Chivo`;
-  context.fillStyle = 'black';
-  context.fillText('Logoipsum', 0.3972 * width, 0.5355 * height);
+  // context.font = `${0.1455 * height}px Chivo`;
+  // context.fillStyle = 'black';
+  // context.fillText('Logoipsum', 0.3972 * width, 0.5355 * height);
 
   renderAnimatedText(
     context,
