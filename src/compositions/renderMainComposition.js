@@ -3,6 +3,7 @@ import { renderThreePictures } from './renderThreePictures.js';
 import { renderOutro } from './renderOutro.js';
 
 export function renderMainComposition(
+  canvas,
   context,
   image1,
   image2,
@@ -39,7 +40,7 @@ export function renderMainComposition(
   context.translate((0.25 * width) * (1 - slideProgress), 0);
   context.globalAlpha = slideProgress;
 
-  renderOutro(context, logo, width, height, time - 6.59);
+  renderOutro(canvas,context, logo, width, height, time - 6.59);
 
   context.restore();
 }

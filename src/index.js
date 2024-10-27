@@ -71,6 +71,7 @@ for (let i = 0; i < frameCount; i++) {
   const image3 = await getVideo3Frame();
 
   renderMainComposition(
+    canvas,
     context,
     image1,
     image2,
