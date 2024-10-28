@@ -1,46 +1,36 @@
-import { interpolateKeyframes } from '../utils/interpolateKeyframes.js';
-import { renderThreePictures } from './renderThreePictures.js';
-import { renderOutro } from './renderOutro.js';
+import { loadImage } from "canvas";
+import { scene1 } from "./scene1.js";
+import { slideTransition } from "./slideTransition.js";
+import { scene2 } from "./scene2.js";
 
-export function renderMainComposition(
-  canvas,
+export async function renderMainComposition(
   context,
-  image1,
-  image2,
-  image3,
-  logo,
   width,
   height,
-  time,
+  time
 ) {
 
-  // Interpolate the x position to create a slide effect between the polaroid pictures scene
-  // and the outro scene
-  const slideProgress = interpolateKeyframes([
-    { time: 6.59, value: 0 },
-    { time: 7.63, value: 1, easing: 'cubic-in-out' },
-  ], time);
+  const companyName = "TCS"
 
-  // Scene 1 – The three polaroid pictures
+  if (time <= 3) {
+    // Clear the canvas with a white background color. This is required as we are reusing the canvas with every frame
+    // context.fillStyle = "#ffffff";
+    // context.fillRect(0, 0, width, height);
+    const background = await loadImage("assets/company-summary/background1.png");
+    context.drawImage(background, 0, 0, width, height);
+  }
 
-  // Move the slide over 25% of the canvas width while adjusting its opacity with globalAlpha
-  context.save();
-  context.translate((0.25 * width) * -slideProgress, 0);
-  context.globalAlpha = 1 - slideProgress;
+  await scene1(context, width, time, companyName);
 
-  // Render the polaroid picture scene using relative sizes
-  renderThreePictures(context, image1, image2, image3, 0.9636 * width, 0.8843 * height, time);
+  if (time > 3.5 && time <= 6) {
+    // context.fillStyle = "#ffffff";
+    // context.fillRect(0, 0, width, height);
+    const background = await loadImage("assets/company-summary/background2.png");
+    context.drawImage(background, 0, 0, width, height);
+  }
 
-  context.restore();
+  slideTransition(context, width, height, time - 3);
 
-  // Scene 2 – The outro
 
-  // Move the slide over 25% of the canvas width while adjusting its opacity with globalAlpha
-  context.save();
-  context.translate((0.25 * width) * (1 - slideProgress), 0);
-  context.globalAlpha = slideProgress;
-
-  renderOutro(canvas,context, logo, width, height, time - 6.59);
-
-  context.restore();
+  await scene2(context, width, time - 4, companyName);
 }
