@@ -1,14 +1,14 @@
-import { interpolateKeyframes } from "../utils/interpolateKeyframes.js";
+import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 
 export function slideTransition(context, width, height, time) {
   if (time < 0) return;
 
-  context.fillStyle = "#5670FB";
+  context.fillStyle = '#5670FB';
 
   const t = interpolateKeyframes(
     [
       { time: 0, value: 0 },
-      { time: 0.5, value: width, easing: "cubic-in-out" },
+      { time: 0.5, value: width, easing: 'cubic-in-out' },
       { time: 1, value: 0 },
     ],
     time

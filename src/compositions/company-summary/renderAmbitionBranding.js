@@ -1,12 +1,10 @@
-import { loadImage } from "canvas";
-import { interpolateKeyframes } from "../utils/interpolateKeyframes.js";
+import { loadImage } from 'canvas';
+import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 
-export async function renderAmbitionBranding(
-  context,
-  width,
-  time
-) {
-  const ambitionboxLogo = await loadImage("assets/company-summary/ambitionbox-logo.svg");
+export async function renderAmbitionBranding(context, width, time) {
+  const ambitionboxLogo = await loadImage(
+    'assets/company-summary/ambitionbox-logo.svg'
+  );
 
   const opacity = interpolateKeyframes(
     [
@@ -18,15 +16,15 @@ export async function renderAmbitionBranding(
 
   context.globalAlpha = opacity;
 
-  const poweredBy = "Powered by";
-  context.font = "20px Arial";
-  const poweredByMetrics = context.measureText("Powered by");
+  const poweredBy = 'Powered by';
+  context.font = '20px Arial';
+  const poweredByMetrics = context.measureText('Powered by');
   const poweredByWidth = poweredByMetrics.width;
   const poweredByHeight =
     poweredByMetrics.actualBoundingBoxAscent +
     poweredByMetrics.actualBoundingBoxDescent;
 
-  context.fillStyle = "#000";
+  context.fillStyle = '#000';
   context.fillText(poweredBy, (width - poweredByWidth) / 2, 1000);
 
   context.drawImage(

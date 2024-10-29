@@ -1,21 +1,20 @@
-import { renderAnimatedBlockLeftToRight } from "./renderAnimatedBlockLeftToRight.js";
-import { renderAnimatedTextDownToUp } from "./renderAnimatedTextDownToUp.js";
-import { renderAmbitionBranding } from "./renderAmbitionBranding.js";
-import { interpolateKeyframes } from "../utils/interpolateKeyframes.js";
+import { renderAnimatedBlockLeftToRight } from './renderAnimatedBlockLeftToRight.js';
+import { renderAnimatedTextDownToUp } from '../renderAnimatedTextDownToUp.js';
+import { renderAmbitionBranding } from './renderAmbitionBranding.js';
+import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 
 export async function scene1(context, width, time, companyName) {
-
   await renderAmbitionBranding(context, width, time);
 
   await renderAnimatedBlockLeftToRight(context, width, time, companyName);
 
-  context.font = "bold 68px Arial";
-  
+  context.font = 'bold 68px Arial';
+
   renderAnimatedTextDownToUp(
     context,
-    "IS THIS THE RIGHT",
-    "#5670FB",
-    (width - context.measureText("IS THIS THE RIGHT").width) / 2,
+    'IS THIS THE RIGHT',
+    '#5670FB',
+    (width - context.measureText('IS THIS THE RIGHT').width) / 2,
     600,
     time,
     0,
@@ -23,9 +22,9 @@ export async function scene1(context, width, time, companyName) {
   );
   renderAnimatedTextDownToUp(
     context,
-    "FIT FOR YOU?",
-    "#5670FB",
-    (width - context.measureText("FIT FOR YOU?").width) / 2 + 30,
+    'FIT FOR YOU?',
+    '#5670FB',
+    (width - context.measureText('FIT FOR YOU?').width) / 2 + 30,
     680,
     time,
     0,
@@ -51,5 +50,4 @@ export async function scene1(context, width, time, companyName) {
   // );
 
   // context.fillRect((width - fontWidth) / 2, 750 - textMetrics.actualBoundingBoxAscent, t, fontHeight);
-
 }
