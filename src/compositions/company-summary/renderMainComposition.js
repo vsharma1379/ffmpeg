@@ -9,6 +9,6 @@ export async function renderMainComposition(context, width, height, time) {
   await scene1(context, width, height, time, scene1Bg, companyName);
   
   const scene2Bg = 'background2';
-  slideTransition(context, width, height, time - 3, scene2Bg);
-  await scene2(context, width, height, time - 4, scene2Bg, companyName);
+  slideTransition(context, width, height, time - 4, scene2Bg);
+  await scene2(context, width, height, time - 5, scene2Bg, companyName);
 }

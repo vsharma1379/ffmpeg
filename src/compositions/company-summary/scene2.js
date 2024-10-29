@@ -1,5 +1,6 @@
 import { renderAnimatedTextDownToUp } from '../renderAnimatedTextDownToUp.js';
 import { loadImage } from 'canvas';
+import { renderFourBlocksInCompanyAtAGlance } from './renderFourBlocksInCompanyAtAGlance.js';
 
 export async function scene2(
   context,
@@ -9,7 +10,7 @@ export async function scene2(
   scene2Bg,
   companyName
 ) {
-  if (time > 0 && time <= 3) {
+  if (time > 0 && time <= 6) {
     // Clear the canvas with a white background color. This is required as we are reusing the canvas with every frame
     // context.fillStyle = '#ffffff';
     // context.fillRect(0, 0, width, height);
@@ -38,26 +39,6 @@ export async function scene2(
       time - 0.5
     );
 
-    if (time - 1 > 0) {
-      const foundIn = await loadImage('assets/company-summary/founded-in.png');
-      context.drawImage(foundIn, 0, 0, width, height);
-    }
-
-    if (time - 1.5 > 0) {
-      const headquarter = await loadImage(
-        'assets/company-summary/headquarter.png'
-      );
-      context.drawImage(headquarter, 0, 0, width, height);
-    }
-
-    if (time - 2 > 0) {
-      const employees = await loadImage('assets/company-summary/employees.png');
-      context.drawImage(employees, 0, 0, width, height);
-    }
-
-    if (time - 2.5 > 0) {
-      const keyFocus = await loadImage('assets/company-summary/key-focus.png');
-      context.drawImage(keyFocus, 0, 0, width, height);
-    }
+    await renderFourBlocksInCompanyAtAGlance(context, width, height, time);
   }
 }
