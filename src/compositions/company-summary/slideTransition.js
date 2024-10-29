@@ -1,7 +1,18 @@
+import { loadImage } from 'canvas';
 import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 
-export function slideTransition(context, width, height, time) {
+export async function slideTransition(context, width, height, time, scene2Bg) {
   if (time < 0) return;
+
+  if (time > 0.5) {
+    // Clear the canvas with a white background color. This is required as we are reusing the canvas with every frame
+    // context.fillStyle = '#ffffff';
+    // context.fillRect(0, 0, width, height);
+    const background = await loadImage(
+      `assets/company-summary/${scene2Bg}.png`
+    );
+    context.drawImage(background, 0, 0, width, height);
+  }
 
   context.fillStyle = '#5670FB';
 
