@@ -1,10 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import {
-  S3Client,
-  ListBucketsCommand,
-  PutObjectCommand,
-} from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -24,11 +20,27 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
   (async () => {
     try {
       const companyId = req.params['companyId'];
-      res.status(200).json({ companyId: companyId });
       //call apis get data
-
+      const apiRes = await Promise.all([
+        fetch(
+          `https://www.ambitionbox.com/company-services/v0/company/${companyId}/details`,
+          {
+            headers: { appId: '123', systemId: '123' },
+          }
+        ).then((res) => res.text()),
+        fetch(
+          `https://employer.ambitionbox.com/employer-branding-services/v0/company/${companyId}/competitor-details/enhanced?limit=9`,
+          {
+            headers: {
+              appId: '123',
+              systemId: '123',
+            },
+          }
+        ).then((res) => res.text()),
+      ]);
+      console.log(JSON.parse(apiRes[0]));
       //await videos
-      const videoPath = 'package.json';
+      const videoPath = 'package-lock.json';
       //upload to s3
       const s3Client = new S3Client({
         region: process.env.AWS_REGION,
@@ -38,24 +50,21 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
         },
       });
 
-      // Configure the parameters for the S3 upload
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
+      const videoAbsolutePath = path.join(__dirname, videoPath);
       const uploadParams = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: 'samplefile',
-        Body: fs.createReadStream(path.join(__dirname)),
+        Key: `company-videos/${companyId}`,
+        Body: fs.createReadStream(videoAbsolutePath),
       };
 
       // Upload the file to S3
-      await s3Client
-        .send(new ListBucketsCommand(uploadParams))
-        .then((data) => console.log('bucket data======', data));
       await s3Client.send(new PutObjectCommand(uploadParams)).then((data) => {
         console.log('data==', data);
         // Delete the file from the local filesystem after successful upload
-        // if (fs.existsSync(filePath)) {
-        //   fs.unlink(filePath, (err) => {
+        // if (fs.existsSync(videoAbsolutePath)) {
+        //   fs.unlink(videoAbsolutePath, (err) => {
         //     if (err) {
         //       console.error('Error deleting file:', err);
         //     } else {
@@ -63,6 +72,7 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
         //     }
         //   });
         // }
+        res.status(200).send({ msg: 'success' });
       });
 
       //return 200 response
