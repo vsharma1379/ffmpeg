@@ -9,7 +9,7 @@ export async function slideTransition(context, width, height, time, scene2Bg) {
     // context.fillStyle = '#ffffff';
     // context.fillRect(0, 0, width, height);
     const background = await loadImage(
-      `assets/company-summary/${scene2Bg}.png`
+      `assets/company-summary/${scene2Bg}`
     );
     context.drawImage(background, 0, 0, width, height);
   }

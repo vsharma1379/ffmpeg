@@ -3,7 +3,7 @@ import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 
 export async function renderAmbitionBranding(context, width, time) {
   const ambitionboxLogo = await loadImage(
-    'assets/company-summary/ambitionbox-logo.svg'
+    'assets/company-summary/ambitionbox-logo.png'
   );
 
   const opacity = interpolateKeyframes(
