@@ -5,7 +5,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
+import DataService from './src/services/data.js';
 //express connect & setup
 const app = express();
 const PORT = process.env.port || 3000;
@@ -21,24 +21,8 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
     try {
       const companyId = req.params['companyId'];
       //call apis get data
-      const apiRes = await Promise.all([
-        fetch(
-          `https://www.ambitionbox.com/company-services/v0/company/${companyId}/details`,
-          {
-            headers: { appId: '123', systemId: '123' },
-          }
-        ).then((res) => res.text()),
-        fetch(
-          `https://employer.ambitionbox.com/employer-branding-services/v0/company/${companyId}/competitor-details/enhanced?limit=9`,
-          {
-            headers: {
-              appId: '123',
-              systemId: '123',
-            },
-          }
-        ).then((res) => res.text()),
-      ]);
-      console.log(JSON.parse(apiRes[0]));
+      const dataService = new DataService(companyId);
+      const data = await dataService.fetchData();
       //await videos
       const videoPath = 'package-lock.json';
       //upload to s3
@@ -63,18 +47,17 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
       await s3Client.send(new PutObjectCommand(uploadParams)).then((data) => {
         console.log('data==', data);
         // Delete the file from the local filesystem after successful upload
-        // if (fs.existsSync(videoAbsolutePath)) {
-        //   fs.unlink(videoAbsolutePath, (err) => {
-        //     if (err) {
-        //       console.error('Error deleting file:', err);
-        //     } else {
-        //       console.log('File deleted successfully.');
-        //     }
-        //   });
-        // }
+        if (fs.existsSync(videoAbsolutePath)) {
+          fs.unlink(videoAbsolutePath, (err) => {
+            if (err) {
+              console.error('Error deleting file:', err);
+            } else {
+              console.log('File deleted successfully.');
+            }
+          });
+        }
         res.status(200).send({ msg: 'success' });
       });
-
       //return 200 response
     } catch (err) {
       console.error('=========error========', err);
