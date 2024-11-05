@@ -2,3 +2,4 @@
 node_modules
 tmp
 out
+.DS_STORE

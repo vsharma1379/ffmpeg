@@ -5,14 +5,20 @@
   "description": "Video Rendering with Node.js and FFmpeg",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "node --env-file=.env server.js"
   },
-  "author": "Casper Kloppenburg",
+  "author": "vivek sharma",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.682.0",
     "canvas": "^2.10.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.1",
     "ffmpeg-static": "^5.1.0",
-    "fluent-ffmpeg": "^2.1.2"
+    "fluent-ffmpeg": "^2.1.2",
+    "path": "^0.12.7",
+    "url": "^0.11.4"
   },
   "devDependencies": {
     "prettier": "^2.7.1"
