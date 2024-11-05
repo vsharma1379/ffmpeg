@@ -8,8 +8,8 @@ import {createCompanySummaryVideo} from './compositions/company-summary/index.js
 ffmpeg.setFfmpegPath(ffmpegStatic);
 
 // Canvas dimensions
-const width = 720;
-const height = 1280;
+const width = 1080;
+const height = 1920;
 
 const canvas = new Canvas(width, height);
 const context = canvas.getContext("2d");

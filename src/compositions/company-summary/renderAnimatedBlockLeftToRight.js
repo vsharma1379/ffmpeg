@@ -8,14 +8,8 @@ export async function renderAnimatedBlockLeftToRight(
   time,
   companyName
 ) {
-  // Define canvas dimensions
-  const logoContainerSize = 170;
-
-  const padding = 20; // Padding around the box
-  const gap = 20; // Space between image and text
-
-  const parentBoxWidth = 600;
-  const parentBoxHeight = logoContainerSize + 2 * padding;
+  const parentBoxWidth = 905;
+  const parentBoxHeight = 374;
 
   const translateX = (width - parentBoxWidth) / 2;
 
@@ -33,21 +27,18 @@ export async function renderAnimatedBlockLeftToRight(
   );
 
   const boxY = 200;
+  const starHeight = 40;
+
+  const logoContainerWidth = 320, logoContainerHeight =  276;
+
+  const paddingTb = 52, paddingLr = 42; // Padding around the box
+  const gap = 20; // Space between image and text
 
   // Parent container box
-  context.fillStyle = '#5670FB';
-  drawRoundedRect(context, t, boxY, parentBoxWidth, parentBoxHeight, 16);
-
-  // Add white background container for logo of 100 x 100
-  context.fillStyle = '#FFFFFF';
-  drawRoundedRect(
-    context,
-    t + padding,
-    boxY + padding,
-    logoContainerSize,
-    logoContainerSize,
-    16
+  const logoPlaceholder = await loadImage(
+    `assets/company-summary/logo-placeholder.png`
   );
+  context.drawImage(logoPlaceholder, t, boxY, parentBoxWidth, parentBoxHeight);
 
   const companyLogo = await loadImage(
     'assets/company-summary/logo-rgb-black.png'
@@ -56,39 +47,39 @@ export async function renderAnimatedBlockLeftToRight(
   /**  Position image in center of the box */
   // Calculate aspect ratios
   const imgAspectRatio = companyLogo.width / companyLogo.height;
-  const boxAspectRatio = logoContainerSize / logoContainerSize;
+  const boxAspectRatio = logoContainerWidth / logoContainerHeight;
 
   // Determine dimensions to fit the image within the box (contain)
   let drawWidth, drawHeight;
   if (imgAspectRatio > boxAspectRatio) {
     // Image is wider than the box, fit width and adjust height
-    drawWidth = logoContainerSize;
-    drawHeight = logoContainerSize / imgAspectRatio;
+    drawWidth = logoContainerWidth;
+    drawHeight = logoContainerHeight / imgAspectRatio;
   } else {
     // Image is taller than or equal in aspect ratio to the box, fit height and adjust width
-    drawHeight = logoContainerSize;
-    drawWidth = logoContainerSize * imgAspectRatio;
+    drawHeight = logoContainerHeight;
+    drawWidth = logoContainerWidth * imgAspectRatio;
   }
 
   // Calculate the position to center the image in the box
-  const offsetX = (logoContainerSize - drawWidth) / 2;
-  const offsetY = (logoContainerSize - drawHeight) / 2;
+  const offsetX = (logoContainerWidth - drawWidth) / 2;
+  const offsetY = (logoContainerHeight - drawHeight) / 2;
 
   // Draw the image to fit within the box with centering
   context.drawImage(
     companyLogo,
-    t + padding + offsetX,
-    boxY + padding + offsetY,
+    t + paddingLr + offsetX,
+    boxY + paddingTb + offsetY + starHeight,
     drawWidth,
     drawHeight
   );
 
   // Draw text on the right side of the image
-  context.font = 'bold 56px Arial';
+  context.font = 'bold 72px Arial';
   context.fillStyle = '#FFFFFF';
 
-  const textX = t + padding + logoContainerSize + gap; // Position text after the image
-  const textY = boxY + padding + logoContainerSize / 2; // Center text vertically with the image
+  const textX = t + paddingLr + logoContainerWidth + gap; // Position text after the image
+  const textY = boxY + paddingTb + logoContainerHeight / 2 + starHeight; // Center text vertically with the image
 
   context.textBaseline = 'middle';
   context.fillText(companyName, textX, textY);

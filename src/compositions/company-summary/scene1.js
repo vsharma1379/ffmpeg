@@ -18,27 +18,23 @@ export async function scene1(context, width, height, time, scene1Bg, companyName
 
     await renderAnimatedBlockLeftToRight(context, width, time, companyName);
 
-    context.font = 'bold 68px Arial';
+    context.font = 'bold 80px Arial';
 
     renderAnimatedTextDownToUp(
       context,
       'IS THIS THE RIGHT',
       '#5670FB',
       (width - context.measureText('IS THIS THE RIGHT').width) / 2,
-      600,
+      770,
       time,
-      0,
-      1.5
     );
     renderAnimatedTextDownToUp(
       context,
       'FIT FOR YOU?',
       '#5670FB',
       (width - context.measureText('FIT FOR YOU?').width) / 2 + 30,
-      680,
+      850,
       time,
-      0,
-      1.5
     );
 
     // context.font = "40px Arial";

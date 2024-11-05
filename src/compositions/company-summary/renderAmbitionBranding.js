@@ -16,22 +16,14 @@ export async function renderAmbitionBranding(context, width, time) {
 
   context.globalAlpha = opacity;
 
-  const poweredBy = 'Powered by';
-  context.font = '20px Arial';
-  const poweredByMetrics = context.measureText('Powered by');
-  const poweredByWidth = poweredByMetrics.width;
-  const poweredByHeight =
-    poweredByMetrics.actualBoundingBoxAscent +
-    poweredByMetrics.actualBoundingBoxDescent;
-
-  context.fillStyle = '#000';
-  context.fillText(poweredBy, (width - poweredByWidth) / 2, 1000);
+  const logoWidth = 473 * 0.75;
+  const logoHeight = 150 * 0.75;
 
   context.drawImage(
     ambitionboxLogo,
-    (width - 166) / 2,
-    1000 + poweredByHeight,
-    166,
-    43
+    (width - logoWidth) / 2,
+    1640,
+    logoWidth,
+    logoHeight
   );
 }
