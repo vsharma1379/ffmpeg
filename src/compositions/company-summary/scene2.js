@@ -22,7 +22,7 @@ export async function scene2(
     
     await renderAmbitionBranding(context, width, time);
 
-    context.font = '68px Figtree700';
+    context.font = '84px Figtree700';
 
     renderAnimatedTextDownToUp(
       context,
@@ -38,7 +38,7 @@ export async function scene2(
       'At a glance',
       '#5670FB',
       (width - context.measureText('At a glance').width) / 2 + 30,
-      220,
+      230,
       time - 0.5
     );
 

@@ -3,6 +3,7 @@ import { renderAnimatedTextDownToUp } from '../renderAnimatedTextDownToUp.js';
 import { renderAmbitionBranding } from './renderAmbitionBranding.js';
 import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 import { loadImage } from 'canvas';
+import { renderTypewriterAnimationText } from '../renderTypewritterAnimationText.js';
 
 export async function scene1(context, width, height, time, scene1Bg, companyName) {
   if (time > 0 && time <= 3) {
@@ -26,7 +27,7 @@ export async function scene1(context, width, height, time, scene1Bg, companyName
       '#5670FB',
       (width - context.measureText('IS THIS THE RIGHT').width) / 2,
       920,
-      time - 1,
+      time,
     );
 
     context.font = '112px Figtree700';
@@ -36,7 +37,19 @@ export async function scene1(context, width, height, time, scene1Bg, companyName
       '#5670FB',
       (width - context.measureText('FIT FOR YOU?').width) / 2 + 30,
       1030,
-      time - 1,
+      time,
+    );
+
+    context.font = '48px Figtree400';
+    const text = "Here's everything you need to know!";
+    renderTypewriterAnimationText(
+      null,
+      context,
+      text,
+      '48px Figtree400',
+      (width - context.measureText(text).width) / 2,
+      1150,
+      time - 1
     );
 
     // context.font = "40px Arial";

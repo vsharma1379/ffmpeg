@@ -111,10 +111,10 @@ export async function renderFourBlocksInCompanyAtAGlance(
 
     context.fillStyle = '#FFF';
     context.font = '40px Figtree600';
-    context.fillText('Key Focus in', 530, 1270);
+    context.fillText('Key Focus in', 530, 1260);
 
     context.font = '60px Figtree700';
-    context.fillText('Pharmacy', 520, 1335);
+    context.fillText('Pharmacy', 520, 1325);
 
     context.restore();
   }

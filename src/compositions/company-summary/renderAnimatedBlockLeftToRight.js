@@ -19,7 +19,7 @@ export async function renderAnimatedBlockLeftToRight(
       // At time 0, we want x to be 100
       { time: 0, value: -parentBoxWidth },
       // At time 1.5, we want x to be 550 (using Cubic easing)
-      { time: 1.5, value: translateX, easing: 'cubic-in-out' },
+      { time: 0.75, value: translateX, easing: 'cubic-in-out' },
     ],
     time
   );

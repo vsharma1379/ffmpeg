@@ -18,7 +18,7 @@ export function renderAnimatedTextDownToUp(context, text, color, x, y, time) {
   // Interpolate the y position of the text from 0 to the font size
   const offset = interpolateKeyframes([
     { time: 0, value: fontHeight },
-    { time: 0.5, value: 0, easing: "cubic-in-out" },
+    { time: 1, value: 0, easing: "cubic-in-out" },
   ], time);
 
   // Clip to the bounding box of the text

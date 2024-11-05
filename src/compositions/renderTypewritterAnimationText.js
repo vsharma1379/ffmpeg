@@ -8,7 +8,7 @@ export function renderTypewriterAnimationText(canvas, context, text, font, x, y,
   context.save();
 
   context.font = font;
-  context.fillStyle = 'black';
+  context.fillStyle = '#1E223C';
 
   // Measure the text dimensions
   const textMetrics = context.measureText(text);
