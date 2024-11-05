@@ -27,10 +27,10 @@ export async function renderFourBlocksInCompanyAtAGlance(
     context.drawImage(foundIn, 80, 480, 365, 255);
 
     context.fillStyle = '#FFFFFF';
-    context.font = '600 40px Arial';
-    context.fillText('Founded in', 120, 610);
+    context.font = '40px Figtree600';
+    context.fillText('Founded in', 120, 600);
 
-    context.font = 'bold 56px Arial';
+    context.font = '60px Figtree700';
     context.fillText('1968', 170, 665);
 
     context.restore();
@@ -55,11 +55,11 @@ export async function renderFourBlocksInCompanyAtAGlance(
     context.drawImage(headquarter, 400, 650, 581, 348);
 
     context.fillStyle = '#FFFFFF';
-    context.font = '600 40px Arial';
+    context.font = '40px Figtree600';
     context.fillText('Headquarters', 510, 800);
 
-    context.font = 'bold 56px Arial';
-    context.fillText('Mumbai', 530, 855);
+    context.font = '60px Figtree700';
+    context.fillText('Mumbai', 530, 865);
 
     context.restore();
   }
@@ -84,11 +84,11 @@ export async function renderFourBlocksInCompanyAtAGlance(
     context.drawImage(employees, 40, 900, 442, 316);
 
     context.fillStyle = '#FFFFFF';
-    context.font = '600 40px Arial';
-    context.fillText('Employee Count', 100, 1060);
+    context.font = '40px Figtree600';
+    context.fillText('Employee Count', 70, 1060);
 
-    context.font = 'bold 56px Arial';
-    context.fillText('200-300', 120, 1115);
+    context.font = '60px Figtree700';
+    context.fillText('200-300', 110, 1125);
 
     context.restore();
   }
@@ -110,11 +110,11 @@ export async function renderFourBlocksInCompanyAtAGlance(
     context.drawImage(keyFocus, 420, 1100, 605, 344);
 
     context.fillStyle = '#FFF';
-    context.font = '600 40px Arial';
+    context.font = '40px Figtree600';
     context.fillText('Key Focus in', 530, 1270);
 
-    context.font = 'bold 56px Arial';
-    context.fillText('Pharmacy', 520, 1325);
+    context.font = '60px Figtree700';
+    context.fillText('Pharmacy', 520, 1335);
 
     context.restore();
   }

@@ -1,3 +1,4 @@
+import { renderAmbitionBranding } from './renderAmbitionBranding.js';
 import { renderAnimatedTextDownToUp } from '../renderAnimatedTextDownToUp.js';
 import { loadImage } from 'canvas';
 import { renderFourBlocksInCompanyAtAGlance } from './renderFourBlocksInCompanyAtAGlance.js';
@@ -18,8 +19,10 @@ export async function scene2(
       `assets/company-summary/${scene2Bg}`
     );
     context.drawImage(background, 0, 0, width, height);
+    
+    await renderAmbitionBranding(context, width, time);
 
-    context.font = 'bold 68px Arial';
+    context.font = '68px Figtree700';
 
     renderAnimatedTextDownToUp(
       context,

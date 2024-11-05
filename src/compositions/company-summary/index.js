@@ -14,7 +14,7 @@ export const createCompanySummaryVideo = async (canvas, context, width, height) 
 
   // The video length and frame rate, as well as the number of frames required
   // to create the video
-  const duration = 11;
+  const duration = 12;
   const frameRate = 24;
   const frameCount = Math.floor(duration * frameRate);
 

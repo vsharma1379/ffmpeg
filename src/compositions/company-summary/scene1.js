@@ -14,27 +14,29 @@ export async function scene1(context, width, height, time, scene1Bg, companyName
     );
     context.drawImage(background, 0, 0, width, height);
 
-    await renderAmbitionBranding(context, width, time);
+    await renderAmbitionBranding(context, width, time, true);
 
     await renderAnimatedBlockLeftToRight(context, width, time, companyName);
 
-    context.font = 'bold 80px Arial';
+    context.font = '88px Figtree700';
 
     renderAnimatedTextDownToUp(
       context,
       'IS THIS THE RIGHT',
       '#5670FB',
       (width - context.measureText('IS THIS THE RIGHT').width) / 2,
-      770,
-      time,
+      920,
+      time - 1,
     );
+
+    context.font = '112px Figtree700';
     renderAnimatedTextDownToUp(
       context,
       'FIT FOR YOU?',
       '#5670FB',
       (width - context.measureText('FIT FOR YOU?').width) / 2 + 30,
-      850,
-      time,
+      1030,
+      time - 1,
     );
 
     // context.font = "40px Arial";

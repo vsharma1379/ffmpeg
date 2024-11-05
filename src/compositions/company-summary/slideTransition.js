@@ -4,7 +4,7 @@ import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 export async function slideTransition(context, width, height, time, scene2Bg) {
   if (time < 0) return;
 
-  if (time > 0.5) {
+  if (time > 0.25) {
     // Clear the canvas with a white background color. This is required as we are reusing the canvas with every frame
     // context.fillStyle = '#ffffff';
     // context.fillRect(0, 0, width, height);
@@ -19,11 +19,11 @@ export async function slideTransition(context, width, height, time, scene2Bg) {
   const t = interpolateKeyframes(
     [
       { time: 0, value: 0 },
-      { time: 0.5, value: width, easing: 'cubic-in-out' },
-      { time: 1, value: 0 },
+      { time: 0.25, value: width, easing: 'cubic-in-out' },
+      { time: 0.5, value: 0 },
     ],
     time
   );
 
-  context.fillRect(time < 0.5 ? 0 : width - t, 0, t, height);
+  context.fillRect(time < 0.25 ? 0 : width - t, 0, t, height);
 }

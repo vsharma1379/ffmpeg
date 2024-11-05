@@ -20,13 +20,11 @@ export async function renderAnimatedBlockLeftToRight(
       { time: 0, value: -parentBoxWidth },
       // At time 1.5, we want x to be 550 (using Cubic easing)
       { time: 1.5, value: translateX, easing: 'cubic-in-out' },
-      // At time 3, we want x to be 200 (using Cubic easing)
-      { time: 3, value: translateX, easing: 'cubic-in-out' },
     ],
     time
   );
 
-  const boxY = 200;
+  const boxY = 300;
   const starHeight = 40;
 
   const logoContainerWidth = 320, logoContainerHeight =  276;
@@ -75,7 +73,7 @@ export async function renderAnimatedBlockLeftToRight(
   );
 
   // Draw text on the right side of the image
-  context.font = 'bold 72px Arial';
+  context.font = '72px Figtree700';
   context.fillStyle = '#FFFFFF';
 
   const textX = t + paddingLr + logoContainerWidth + gap; // Position text after the image

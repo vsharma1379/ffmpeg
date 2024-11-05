@@ -1,7 +1,12 @@
 import { loadImage } from 'canvas';
 import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 
-export async function renderAmbitionBranding(context, width, time) {
+export async function renderAmbitionBranding(
+  context,
+  width,
+  time,
+  isFadeInEffect = false
+) {
   const ambitionboxLogo = await loadImage(
     'assets/company-summary/ambitionbox-logo.png'
   );
@@ -14,7 +19,7 @@ export async function renderAmbitionBranding(context, width, time) {
     time
   );
 
-  context.globalAlpha = opacity;
+  if (isFadeInEffect) context.globalAlpha = opacity;
 
   const logoWidth = 473 * 0.75;
   const logoHeight = 150 * 0.75;
