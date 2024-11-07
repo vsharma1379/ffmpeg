@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import DataService from './src/services/data.js';
+import { createCompanySummaryVideo } from './src/compositions/company-summary/index.js';
 //express connect & setup
 const app = express();
 const PORT = process.env.port || 3000;
@@ -23,6 +24,9 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
       //call apis get data
       const dataService = new DataService(companyId);
       const data = await dataService.fetchData();
+      const outputFilePath = await createCompanySummaryVideo(companyId);
+      console.log("outputFilePath", outputFilePath);
+      
       //await videos
       const videoPath = 'package-lock.json';
       //upload to s3
@@ -58,7 +62,7 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
         }
         res.status(200).send({ msg: 'success' });
       });
-      //return 200 response
+      // return 200 response
     } catch (err) {
       console.error('=========error========', err);
       res.status(500).send({ status: 'failed', msg: err });

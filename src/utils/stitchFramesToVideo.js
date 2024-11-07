@@ -8,7 +8,7 @@ export async function stitchFramesToVideo(
   frameRate,
 ) {
 
-  await new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     ffmpeg()
 
       // Tell FFmpeg to stitch all images together in the provided directory
@@ -44,7 +44,7 @@ export async function stitchFramesToVideo(
       .saveToFile(outputFilepath)
 
       // Resolve or reject (throw an error) the Promise once FFmpeg completes
-      .on('end', () => resolve())
+      .on('end', () => resolve(outputFilepath))
       .on('error', (error) => reject(new Error(error)));
   });
 }
