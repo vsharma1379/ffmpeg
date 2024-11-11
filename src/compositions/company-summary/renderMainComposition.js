@@ -3,6 +3,7 @@ import { scene2 } from './scene2.js';
 import { scene3 } from './scene3.js';
 import { scene4 } from './scene4.js';
 import { scene5 } from './scene5.js';
+import { scene6 } from './scene6.js';
 import { slideTransition } from './slideTransition.js';
 
 export async function renderMainComposition(context, width, height, time) {
@@ -24,6 +25,10 @@ export async function renderMainComposition(context, width, height, time) {
   await scene4(context, width, height, time - 17.5, scene4Bg); // 6 sec
 
   const scene5Bg = 'background5.png';
-  slideTransition(context, width, height, time - 23.5, scene4Bg); // 0.5 sec
+  slideTransition(context, width, height, time - 23.5, scene5Bg); // 0.5 sec
   await scene5(context, width, height, time - 24, scene5Bg); // 8 sec
+
+  const scene6Bg = 'background6.png';
+  slideTransition(context, width, height, time - 32, scene6Bg); // 0.5 sec
+  await scene6(context, width, height, time - 32.5, scene6Bg); // 8 sec
 }

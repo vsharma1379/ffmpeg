@@ -26,7 +26,7 @@ export const createCompanySummaryVideo = async (companyId, frameRate = 24) => {
 
   // The video length and frame rate, as well as the number of frames required
   // to create the video
-  const duration = 32;
+  const duration = 37;
   const frameCount = Math.floor(duration * frameRate);
 
   const canvas = new Canvas(width, height);
@@ -37,6 +37,7 @@ export const createCompanySummaryVideo = async (companyId, frameRate = 24) => {
   registerFont('assets/fonts/Figtree-Medium.ttf', { family: 'Figtree500' });
   registerFont('assets/fonts/Figtree-SemiBold.ttf', { family: 'Figtree600' });
   registerFont('assets/fonts/Figtree-Bold.ttf', { family: 'Figtree700' });
+  registerFont('assets/fonts/Figtree-ExtraBold.ttf', { family: 'Figtree800' });
 
   // Render each frame
   for (let i = 0; i < frameCount; i++) {
