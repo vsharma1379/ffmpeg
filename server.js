@@ -25,6 +25,7 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
       const dataService = new DataService(companyId);
       await dataService.fetchData();
       const data = DataService.getCompanyData(companyId);
+      res.status(200).send({ msg: 'success' });
       console.log('data===========', data);
       // await videos
       const outputFilePath = await createCompanySummaryVideo(companyId);
@@ -61,7 +62,6 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
             }
           });
         }
-        res.status(200).send({ msg: 'success' });
       });
       // return 200 response
     } catch (err) {
