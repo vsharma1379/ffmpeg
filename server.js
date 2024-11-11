@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import DataService from './src/services/data.js';
 import { createCompanySummaryVideo } from './src/compositions/company-summary/index.js';
-//express connect & setup
+// express connect & setup
 const app = express();
 const PORT = process.env.port || 3000;
 const corsOptions = {
@@ -16,20 +16,20 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-//video upload api
+// video upload api
 app.get('/employer-branding-video/:companyId', (req, res) => {
   (async () => {
     try {
       const companyId = req.params['companyId'];
-      //call apis get data
+      // call apis get data
       const dataService = new DataService(companyId);
-      const data = await dataService.fetchData();
+      await dataService.fetchData();
+      const data = DataService.getCompanyData(companyId);
+      console.log('data===========', data);
+      // await videos
       const outputFilePath = await createCompanySummaryVideo(companyId);
       console.log("outputFilePath", outputFilePath);
-      
-      //await videos
-      const videoPath = 'package-lock.json';
-      //upload to s3
+      // upload to s3
       const s3Client = new S3Client({
         region: process.env.AWS_REGION,
         credentials: {
@@ -40,16 +40,17 @@ app.get('/employer-branding-video/:companyId', (req, res) => {
 
       const __filename = fileURLToPath(import.meta.url);
       const __dirname = dirname(__filename);
-      const videoAbsolutePath = path.join(__dirname, videoPath);
+      const videoAbsolutePath = path.join(__dirname, outputFilePath);
       const uploadParams = {
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: `company-videos/${companyId}`,
+        Key: `company-videos/${companyId}/${companyId}.mp4`,
         Body: fs.createReadStream(videoAbsolutePath),
       };
 
       // Upload the file to S3
       await s3Client.send(new PutObjectCommand(uploadParams)).then((data) => {
         console.log('data==', data);
+        DataService.clearCompanyData(companyId);
         // Delete the file from the local filesystem after successful upload
         if (fs.existsSync(videoAbsolutePath)) {
           fs.unlink(videoAbsolutePath, (err) => {

@@ -1,7 +1,16 @@
 class DataService {
   constructor(companyId = '') {
-    this.data = {};
     this.companyId = companyId;
+  }
+
+  static data = {};
+
+  static getCompanyData(id) {
+    return DataService.data[id];
+  }
+
+  static clearCompanyData(id) {
+    delete DataService.data[id];
   }
 
   // Method to fetch data from the API and update cache
@@ -51,16 +60,15 @@ class DataService {
         ).then((res) => res.text()),
       ]);
 
-      this.data = {
+      DataService.data[this.companyId] = {
         companyData: JSON.parse(companyData),
         competitorData: JSON.parse(competitorData)?.data,
         ratingsData: JSON.parse(ratingsData)?.data,
         popularProfilesData: JSON.parse(popularProfilesData)?.data,
         benefitsData: JSON.parse(benefitsData)?.data,
       };
-      return this.data;
     } catch (error) {
-      throw new Error('API request failed');
+      throw new Error(error);
     }
   }
 }
