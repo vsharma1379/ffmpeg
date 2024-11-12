@@ -1,5 +1,4 @@
 import { loadImage } from 'canvas';
-import { drawRoundedRect } from '../../utils/drawRoundedRect.js';
 import { interpolateKeyframes } from '../../utils/interpolateKeyframes.js';
 
 export async function renderAnimatedBlockLeftToRight(
